@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SHAHD MAGDY — Video Editor | Motion Graphics | Reels</title>
+  <meta name="description" content="Official cinematic portfolio of Shahd Magdy. Video Editor and Motion Graphics Designer specializing in Reels, Advertisements, and Motion Graphics." />
+  <meta name="author" content="Shahd Magdy" />
+
+  <!-- Google Fonts: Editorial Serif & Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Supabase CDN Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- Main Luxury Editorial & Cinematic Styling -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Atmospheric Background Lighting & Burgundy Light Leaks -->
+  <div class="bg-atmosphere" aria-hidden="true">
+    <div class="bg-orb bg-orb--1"></div>
+    <div class="bg-orb bg-orb--2"></div>
+    <div class="bg-orb bg-orb--3"></div>
+    <div class="bg-orb bg-orb--4"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="nav" id="mainNav">
+      <div class="nav__logo">
+        <a href="#hero" class="nav__logo-text">SHAHD MAGDY</a>
+        <span class="nav__logo-badge">PORTFOLIO</span>
+      </div>
+
+      <ul class="nav__links">
+        <li><a href="#hero" class="nav__link nav__link--active">Home</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#tools" class="nav__link">Tools</a></li>
+        <li><a href="#work" class="nav__link">Selected Work</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+        <li><a href="admin.html" class="nav__admin-link" title="Private Admin Dashboard">Admin ✦</a></li>
+      </ul>
+
+      <button class="nav__menu-btn" id="navMenuBtn" aria-label="Toggle Navigation">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__links">
+      <li><a href="#hero" class="mobile-menu__link">HOME</a></li>
+      <li><a href="#about" class="mobile-menu__link">ABOUT</a></li>
+      <li><a href="#tools" class="mobile-menu__link">TOOLS</a></li>
+      <li><a href="#work" class="mobile-menu__link">SELECTED WORK</a></li>
+      <li><a href="#contact" class="mobile-menu__link">CONTACT</a></li>
+      <li><a href="admin.html" class="mobile-menu__link" style="color: var(--gold-accent); font-size: 1.3rem;">ADMIN DASHBOARD ✦</a></li>
+    </ul>
+  </div>
+
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="hero">
+      <div class="hero__bg-shape" aria-hidden="true"></div>
+      <div class="hero__light-leak" aria-hidden="true"></div>
+
+      <!-- Editorial Metadata Stamps (Inspired by High-Fashion Reference) -->
+      <div class="hero__label hero__label--top-left anim-fade" data-delay="300">
+        <span class="hero__label-line"></span>
+        <span>NEW EDITION</span>
+      </div>
+
+      <div class="hero__label hero__label--top-right anim-fade" data-delay="400">
+        <span>CREATIVE PORTFOLIO</span>
+        <span class="hero__label-line"></span>
+      </div>
+
+      <div class="hero__label hero__label--bottom-left anim-fade" data-delay="500">
+        <span class="hero__label-line"></span>
+        <span>REELS / ADS / MOTION</span>
+      </div>
+
+      <div class="hero__label hero__label--bottom-right anim-fade" data-delay="600">
+        <span>2026</span>
+        <span class="hero__label-line"></span>
+      </div>
+
+      <!-- Fine Decorative SVG Flourishes -->
+      <div class="hero__flourish hero__flourish--left anim-fade" data-delay="300" aria-hidden="true">
+        <svg viewBox="0 0 100 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 0 C50 100, 10 150, 50 200 S90 300, 50 400" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+          <circle cx="50" cy="200" r="4" fill="currentColor" opacity="0.5"/>
+          <path d="M25 180 Q50 200 25 220" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+          <path d="M75 180 Q50 200 75 220" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <div class="hero__flourish hero__flourish--right anim-fade" data-delay="300" aria-hidden="true">
+        <svg viewBox="0 0 100 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 0 C50 100, 90 150, 50 200 S10 300, 50 400" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+          <circle cx="50" cy="200" r="4" fill="currentColor" opacity="0.5"/>
+          <path d="M25 180 Q50 200 25 220" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+          <path d="M75 180 Q50 200 75 220" stroke="currentColor" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <!-- Main Hero Content -->
+      <div class="hero__content">
+        <div class="hero__name">
+          <h1>
+            <span class="hero__name-line anim-text-reveal" data-delay="100">SHAHD</span>
+            <span class="hero__name-line anim-text-reveal" data-delay="250">MAGDY</span>
+          </h1>
+        </div>
+
+        <div class="hero__divider anim-fade" data-delay="400">
+          <span class="hero__divider-ornament">✦</span>
+        </div>
+
+        <div class="hero__titles anim-fade" data-delay="500">
+          <span>VIDEO EDITOR</span>
+          <span class="hero__titles-sep">|</span>
+          <span>MOTION GRAPHICS</span>
+          <span class="hero__titles-sep">|</span>
+          <span>REELS</span>
+        </div>
+
+        <p class="hero__tagline anim-fade" data-delay="650">
+          "Turning your ideas into creative visual stories."
+        </p>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <a href="#about" class="hero__scroll anim-fade" data-delay="800">
+        <span class="hero__scroll-text">SCROLL TO EXPLORE</span>
+        <span class="hero__scroll-arrow">↓</span>
+      </a>
+    </section>
+
+    <!-- ==================== ABOUT ME / CV SECTION ==================== -->
+    <section class="about" id="about">
+      <div class="about__bg-shape" aria-hidden="true"></div>
+
+      <div class="section-label anim-fade">
+        <span class="section-label__number">01</span>
+        <span class="section-label__line"></span>
+        <span class="section-label__text">CURRICULUM VITAE</span>
+      </div>
+
+      <div class="about__content">
+        <h2 class="section-title anim-text-reveal">ABOUT ME</h2>
+
+        <div class="about__intro anim-fade" data-delay="150">
+          <p class="about__text">
+            "I’m Shahd, a Video Editor and Motion Graphics Designer with one year of experience in the field.
+          </p>
+          <p class="about__text">
+            I have worked with two companies and completed an internship at Market Go, where I received a certificate.
+          </p>
+          <p class="about__text">
+            I can take your video and transform it into creative and engaging visual content that communicates your idea clearly and professionally."
+          </p>
+        </div>
+
+        <!-- Luxury Editorial CV Information Area -->
+        <div class="about__cv anim-fade" data-delay="300">
+          <div class="cv-grid">
+            <div class="cv-item">
+              <span class="cv-item__label">ROLE</span>
+              <span class="cv-item__value">Video Editor<br>Motion Graphics Designer</span>
+            </div>
+
+            <div class="cv-item">
+              <span class="cv-item__label">EXPERIENCE</span>
+              <span class="cv-item__value cv-item__value--highlight">1 Year</span>
+            </div>
+
+            <div class="cv-item">
+              <span class="cv-item__label">WORKED WITH</span>
+              <span class="cv-item__value cv-item__value--highlight">2 Companies</span>
+            </div>
+
+            <div class="cv-item">
+              <span class="cv-item__label">INTERNSHIP</span>
+              <span class="cv-item__value">Market Go</span>
+            </div>
+
+            <div class="cv-item">
+              <span class="cv-item__label">CERTIFICATION</span>
+              <span class="cv-item__value">Market Go Internship Certificate</span>
+            </div>
+
+            <div class="cv-item">
+              <span class="cv-item__label">SPECIALTIES</span>
+              <div class="cv-item__tags">
+                <span class="cv-tag">Reels</span>
+                <span class="cv-tag">Content</span>
+                <span class="cv-tag">Motion Graphics</span>
+                <span class="cv-tag">Advertisements</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SERVICES SECTION ==================== -->
+    <section class="services" id="services">
+      <div class="section-label anim-fade">
+        <span class="section-label__number">02</span>
+        <span class="section-label__line"></span>
+        <span class="section-label__text">CREATIVE SERVICES</span>
+      </div>
+
+      <h2 class="section-title anim-text-reveal">WHAT I DO</h2>
+
+      <div class="services__grid">
+        <div class="service-card anim-fade" data-delay="100">
+          <span class="service-card__number">01</span>
+          <h3 class="service-card__title">Reels Editing</h3>
+          <p class="service-card__desc">Pacing, visual hooks, rhythmic sound design, and viral short-form retention for Instagram & TikTok.</p>
+        </div>
+
+        <div class="service-card anim-fade" data-delay="200">
+          <span class="service-card__number">02</span>
+          <h3 class="service-card__title">Content Video Editing</h3>
+          <p class="service-card__desc">Long-form and YouTube content editing, narrative pacing, multi-cam switching, and dynamic storytelling.</p>
+        </div>
+
+        <div class="service-card anim-fade" data-delay="300">
+          <span class="service-card__number">03</span>
+          <h3 class="service-card__title">Motion Graphics</h3>
+          <p class="service-card__desc">Kinetic typography, animated brand assets, title reveals, and custom 2D visual elements that elevate production value.</p>
+        </div>
+
+        <div class="service-card anim-fade" data-delay="400">
+          <span class="service-card__number">04</span>
+          <h3 class="service-card__title">Social Media Video Editing</h3>
+          <p class="service-card__desc">Platform-optimized formats, subtitle styling, brand color harmony, and captivating visual identity.</p>
+        </div>
+
+        <div class="service-card anim-fade" data-delay="500">
+          <span class="service-card__number">05</span>
+          <h3 class="service-card__title">Advertisement Video Editing</h3>
+          <p class="service-card__desc">High-converting commercial promos, product showcases, brand campaigns, and polished color grading.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TOOLS SECTION ==================== -->
+    <section class="tools" id="tools">
+      <div class="tools__bg-shape" aria-hidden="true"></div>
+
+      <div class="section-label anim-fade">
+        <span class="section-label__number">03</span>
+        <span class="section-label__line"></span>
+        <span class="section-label__text">POST-PRODUCTION SUITE</span>
+      </div>
+
+      <h2 class="section-title anim-text-reveal">TOOLS I USE</h2>
+
+      <div class="tools__grid">
+        <!-- Adobe After Effects -->
+        <div class="tool-card anim-tool" data-delay="150">
+          <div class="tool-card__icon">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" rx="22" fill="#0E0507" stroke="#9999FF" stroke-width="1.5"/>
+              <rect x="5" y="5" width="90" height="90" rx="18" fill="url(#ae-grad)"/>
+              <text x="50" y="63" text-anchor="middle" fill="#C5C5FF" font-family="'Inter', sans-serif" font-weight="700" font-size="36" letter-spacing="-1">Ae</text>
+              <defs>
+                <linearGradient id="ae-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#1A0D33"/>
+                  <stop offset="1" stop-color="#08020E"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3 class="tool-card__name">Adobe After Effects</h3>
+          <p class="tool-card__desc">Motion Graphics, Kinetic Visuals & VFX</p>
+        </div>
+
+        <!-- Adobe Premiere Pro -->
+        <div class="tool-card anim-tool" data-delay="300">
+          <div class="tool-card__icon">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" rx="22" fill="#0E0507" stroke="#EA77FF" stroke-width="1.5"/>
+              <rect x="5" y="5" width="90" height="90" rx="18" fill="url(#pr-grad)"/>
+              <text x="50" y="63" text-anchor="middle" fill="#F3B3FF" font-family="'Inter', sans-serif" font-weight="700" font-size="36" letter-spacing="-1">Pr</text>
+              <defs>
+                <linearGradient id="pr-grad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#30092B"/>
+                  <stop offset="1" stop-color="#0E020C"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h3 class="tool-card__name">Adobe Premiere Pro</h3>
+          <p class="tool-card__desc">Cinematic Video Editing & Sound Design</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SELECTED WORK / HORIZONTAL FILM STRIP ==================== -->
+    <section class="portfolio" id="work">
+      <div class="portfolio__bg-shape" aria-hidden="true"></div>
+
+      <div class="portfolio__header">
+        <div class="section-label anim-fade">
+          <span class="section-label__number">04</span>
+          <span class="section-label__line"></span>
+          <span class="section-label__text">PORTFOLIO ARCHIVE</span>
+        </div>
+
+        <h2 class="section-title anim-text-reveal">SELECTED WORK</h2>
+        <p class="portfolio__subtitle anim-fade">REELS / ADVERTISEMENTS / MOTION GRAPHICS</p>
+
+        <!-- Category Filters -->
+        <div class="portfolio__filters anim-fade" data-delay="200">
+          <button class="filter-btn filter-btn--active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="reels">Reels</button>
+          <button class="filter-btn" data-filter="advertisement">Advertisements</button>
+          <button class="filter-btn" data-filter="motion-graphics">Motion Graphics</button>
+        </div>
+      </div>
+
+      <!-- Horizontal Strip Slider with Drag & Arrows -->
+      <div class="portfolio__strip-wrapper">
+        <button class="portfolio__nav portfolio__nav--prev" id="portfolioPrev" aria-label="Previous Projects">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <div class="portfolio__strip" id="portfolioStrip">
+          <!-- Dynamically populated 14 project cards -->
+        </div>
+
+        <button class="portfolio__nav portfolio__nav--next" id="portfolioNext" aria-label="Next Projects">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="portfolio__scroll-hint anim-fade">
+        <span>DRAG OR SWIPE HORIZONTALLY</span>
+        <span class="portfolio__scroll-hint-arrow">→</span>
+      </div>
+    </section>
+
+    <!-- ==================== LIGHTBOX VIEWER ==================== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Cinematic Video Viewer">
+      <div class="lightbox__overlay"></div>
+      <div class="lightbox__content">
+        <button class="lightbox__close" id="lightboxClose" aria-label="Close Viewer">✕</button>
+        <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous Project">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next Project">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <div class="lightbox__video-wrapper">
+          <video class="lightbox__video" id="lightboxVideo" controls playsinline></video>
+        </div>
+
+        <div class="lightbox__info">
+          <span class="lightbox__category" id="lightboxCategory">CATEGORY</span>
+          <h3 class="lightbox__title" id="lightboxTitle">PROJECT TITLE</h3>
+          <p class="lightbox__desc" id="lightboxDesc">PROJECT DESCRIPTION</p>
+          <span class="lightbox__software" id="lightboxSoftware">SOFTWARE USED</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact" id="contact">
+      <div class="contact__bg-shape" aria-hidden="true"></div>
+
+      <div class="section-label anim-fade">
+        <span class="section-label__number">05</span>
+        <span class="section-label__line"></span>
+        <span class="section-label__text">COLLABORATION</span>
+      </div>
+
+      <div class="contact__content">
+        <h2 class="contact__headline anim-text-reveal">
+          <span>LET'S CREATE</span>
+          <span>SOMETHING GREAT.</span>
+        </h2>
+
+        <p class="contact__sub anim-fade" data-delay="200">
+          "Have a video that needs to become something creative?"
+        </p>
+
+        <a href="mailto:shahdmagdy1115@gmail.com" class="contact__cta anim-fade" data-delay="350">
+          <span>GET IN TOUCH</span>
+        </a>
+
+        <div class="contact__info anim-fade" data-delay="500">
+          <div class="contact__info-item">
+            <span class="contact__info-label">EMAIL</span>
+            <a href="mailto:shahdmagdy1115@gmail.com" class="contact__info-value">shahdmagdy1115@gmail.com</a>
+          </div>
+
+          <div class="contact__info-item">
+            <span class="contact__info-label">INSTAGRAM</span>
+            <a href="https://instagram.com/shahdmesalm5" target="_blank" rel="noopener noreferrer" class="contact__info-value">@shahdmesalm5</a>
+          </div>
+
+          <div class="contact__info-item">
+            <span class="contact__info-label">WHATSAPP</span>
+            <a href="https://wa.me/201224095633" target="_blank" rel="noopener noreferrer" class="contact__info-value">01224095633</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FINAL VISUAL SECTION / FOOTER ==================== -->
+  <footer class="footer">
+    <div class="footer__bg-glow" aria-hidden="true"></div>
+
+    <div class="footer__content">
+      <div class="footer__name anim-text-reveal">
+        <span>SHAHD MAGDY</span>
+      </div>
+
+      <div class="footer__divider">
+        <span class="footer__divider-ornament">✦</span>
+      </div>
+
+      <p class="footer__title anim-fade">VIDEO EDITOR &nbsp;|&nbsp; MOTION GRAPHICS &nbsp;|&nbsp; REELS</p>
+
+      <p class="footer__copy anim-fade" data-delay="200">
+        © 2026 Shahd Magdy. Luxury Editorial &amp; Cinematic Portfolio. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Core Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

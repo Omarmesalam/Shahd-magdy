@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Shahd Magdy Portfolio</title>
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- ==================== AUTHENTICATION SCREEN ==================== -->
+  <div class="auth-container" id="authContainer">
+    <div class="auth-card">
+      <h1 class="auth-card__logo">SHAHD MAGDY</h1>
+      <p class="auth-card__subtitle">PRIVATE ADMIN DASHBOARD</p>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="shahdmagdy1115@gmail.com" required value="shahdmagdy1115@gmail.com" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password / Master Passcode</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••••••" required />
+        </div>
+
+        <button type="submit" class="btn-primary">SECURE SIGN IN</button>
+        <p class="auth-error" id="authError"></p>
+
+        <p class="auth-hint">
+          Protected area. Default master passcode is <code>shahd2026</code>.<br />
+          You can also connect Supabase Authentication inside settings.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== DASHBOARD SHELL ==================== -->
+  <div class="dashboard-shell" id="dashboardShell">
+    <!-- Navigation Bar -->
+    <header class="dashboard-nav">
+      <div class="dashboard-nav__title">
+        <span>SHAHD MAGDY</span>
+        <span class="dashboard-nav__badge">ADMIN</span>
+      </div>
+
+      <div class="dashboard-nav__actions">
+        <a href="index.html" target="_blank" class="btn-secondary" title="Preview live website in a new tab">
+          View Website ↗
+        </a>
+        <button class="btn-secondary btn-logout" id="btnLogout">Sign Out</button>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="dashboard-main">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="dashboard-header__title">PORTFOLIO MANAGER</h2>
+          <p class="dashboard-header__sub">Manage your 14 video projects, upload new work, reorder, or update descriptions.</p>
+        </div>
+        <button class="btn-create" id="btnAddNew">
+          <span>+ ADD NEW PROJECT</span>
+        </button>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="dashboard-tabs">
+        <button class="dashboard-tab is-active" id="tabProjects">All Projects</button>
+        <button class="dashboard-tab" id="tabSettings">Cloud &amp; Database Settings</button>
+      </div>
+
+      <!-- View: Project Listing -->
+      <section id="viewProjects">
+        <div class="project-list" id="projectList">
+          <!-- Dynamically generated projects -->
+        </div>
+      </section>
+
+      <!-- View: Supabase & Backup Settings -->
+      <section id="viewSettings" class="settings-panel">
+        <h3 class="settings-panel__title">SUPABASE CLOUD CONFIGURATION</h3>
+        <p class="settings-panel__desc">
+          Connect your free Supabase database &amp; storage bucket (<code>portfolio-media</code>) so your changes automatically sync to the cloud.
+        </p>
+
+        <div id="supabaseStatus" class="status-badge status-badge--local">
+          ● Local Storage Mode (Offline Ready)
+        </div>
+
+        <form id="supabaseForm">
+          <div class="form-group">
+            <label class="form-label" for="inputSupabaseUrl">Supabase Project URL</label>
+            <input type="url" id="inputSupabaseUrl" class="form-input" placeholder="https://xyzcompany.supabase.co" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inputSupabaseKey">Supabase Anon Public API Key</label>
+            <input type="text" id="inputSupabaseKey" class="form-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..." />
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: auto; padding: 12px 28px;">
+            Save Cloud Settings
+          </button>
+        </form>
+
+        <hr style="border: none; border-top: 1px solid var(--admin-border); margin: 36px 0;" />
+
+        <h3 class="settings-panel__title">BACKUP &amp; RESTORE</h3>
+        <p class="settings-panel__desc">
+          Download a complete JSON backup of all 14 projects, or restore from a previous file anytime.
+        </p>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn-secondary" id="btnExportJson">Export JSON Backup</button>
+          <button class="btn-secondary" id="btnImportJson">Import JSON Backup</button>
+          <button class="btn-secondary" id="btnResetDefaults" style="color: #FFB74D;">Reset to Default 14 Placeholders</button>
+          <input type="file" id="fileImportJson" accept=".json" style="display: none;" />
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================== ADD / EDIT PROJECT MODAL ==================== -->
+  <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+    <div class="modal__dialog">
+      <div class="modal__header">
+        <h3 class="modal__title" id="modalTitle">ADD NEW PROJECT</h3>
+        <button class="modal__close" id="modalClose" aria-label="Close dialog">✕</button>
+      </div>
+
+      <form id="projectForm">
+        <input type="hidden" id="fieldId" />
+
+        <div class="form-group">
+          <label class="form-label" for="fieldTitle">Project Title *</label>
+          <input type="text" id="fieldTitle" class="form-input" placeholder="e.g. Luxury Brand Reel" required />
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label" for="fieldCategory">Category *</label>
+            <select id="fieldCategory" class="form-select" required>
+              <option value="Reels">Reels</option>
+              <option value="Advertisement">Advertisement</option>
+              <option value="Motion Graphics">Motion Graphics</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="fieldAspectRatio">Aspect Ratio</label>
+            <select id="fieldAspectRatio" class="form-select">
+              <option value="9:16">9:16 (Vertical Reel)</option>
+              <option value="16:9">16:9 (Widescreen Commercial)</option>
+              <option value="1:1">1:1 (Square)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fieldSoftware">Software Used *</label>
+          <input type="text" id="fieldSoftware" class="form-input" placeholder="e.g. Adobe After Effects + Premiere Pro" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="fieldDescription">Project Description</label>
+          <textarea id="fieldDescription" class="form-textarea" rows="3" placeholder="Briefly describe the editing style, sound design, rhythm, or concept..."></textarea>
+        </div>
+
+        <!-- Video Input -->
+        <div class="form-group">
+          <label class="form-label" for="fieldVideoUrl">Video URL (MP4, Vimeo, or WebM)</label>
+          <input type="url" id="fieldVideoUrl" class="form-input" placeholder="https://assets.mixkit.co/... or cloud link" />
+          <div style="margin-top: 8px;">
+            <label class="form-label" style="font-size: 0.65rem; color: var(--admin-muted);">OR Upload Video File Directly</label>
+            <input type="file" id="fieldVideoFile" accept="video/mp4,video/webm" class="form-input" style="padding: 8px;" />
+          </div>
+        </div>
+
+        <!-- Thumbnail Input -->
+        <div class="form-group">
+          <label class="form-label" for="fieldThumbnailUrl">Thumbnail Image URL</label>
+          <input type="url" id="fieldThumbnailUrl" class="form-input" placeholder="https://images.unsplash.com/... or cloud link" />
+          <div style="margin-top: 8px;">
+            <label class="form-label" style="font-size: 0.65rem; color: var(--admin-muted);">OR Upload Thumbnail Image</label>
+            <input type="file" id="fieldThumbnailFile" accept="image/*" class="form-input" style="padding: 8px;" />
+          </div>
+        </div>
+
+        <!-- Published Checkbox -->
+        <div class="checkbox-group">
+          <input type="checkbox" id="fieldPublished" checked />
+          <label for="fieldPublished">Publish immediately to public portfolio</label>
+        </div>
+
+        <button type="submit" class="btn-primary" style="margin-top: 20px;">
+          PUBLISH PROJECT
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
