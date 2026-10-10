@@ -15,7 +15,8 @@
   <!-- Supabase CDN Client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
-  <!-- Main Luxury Editorial & Cinematic Styling -->
+  <!-- Main Luxury Editorial & Cinematic Styling (Supports both root and css/ folder) -->
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -451,9 +452,31 @@
     </div>
   </footer>
 
-  <!-- Core Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Core Scripts (Compatible with both root folder and js/ subfolder) -->
+  <script>
+    (function() {
+      var scripts = ['data.js', 'supabase.js', 'app.js'];
+      var idx = 0;
+      function loadNext() {
+        if (idx >= scripts.length) return;
+        var name = scripts[idx];
+        var s = document.createElement('script');
+        s.src = name;
+        s.onload = function() { idx++; loadNext(); };
+        s.onerror = function() {
+          var fb = document.createElement('script');
+          fb.src = 'js/' + name;
+          fb.onload = function() { idx++; loadNext(); };
+          fb.onerror = function() {
+            console.error('Failed to load script: ' + name);
+            idx++; loadNext();
+          };
+          document.body.appendChild(fb);
+        };
+        document.body.appendChild(s);
+      }
+      loadNext();
+    })();
+  </script>
 </body>
 </html>

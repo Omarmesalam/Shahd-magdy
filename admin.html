@@ -14,7 +14,8 @@
   <!-- Supabase JS CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
-  <!-- Admin Styles -->
+  <!-- Admin Styles (Supports both root and css/ folder) -->
+  <link rel="stylesheet" href="admin.css" />
   <link rel="stylesheet" href="css/admin.css" />
 </head>
 <body>
@@ -213,9 +214,31 @@
     </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/supabase.js"></script>
-  <script src="js/admin.js"></script>
+  <!-- Scripts (Supports both root and js/ folder) -->
+  <script>
+    (function() {
+      var scripts = ['data.js', 'supabase.js', 'admin.js'];
+      var idx = 0;
+      function loadNext() {
+        if (idx >= scripts.length) return;
+        var name = scripts[idx];
+        var s = document.createElement('script');
+        s.src = name;
+        s.onload = function() { idx++; loadNext(); };
+        s.onerror = function() {
+          var fb = document.createElement('script');
+          fb.src = 'js/' + name;
+          fb.onload = function() { idx++; loadNext(); };
+          fb.onerror = function() {
+            console.error('Failed to load script: ' + name);
+            idx++; loadNext();
+          };
+          document.body.appendChild(fb);
+        };
+        document.body.appendChild(s);
+      }
+      loadNext();
+    })();
+  </script>
 </body>
 </html>
